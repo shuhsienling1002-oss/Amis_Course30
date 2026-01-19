@@ -27,9 +27,9 @@ def safe_play_audio(text):
         st.caption(f"🔇 (語音生成暫時無法使用)")
 
 # --- 0. 系統配置 ---
-st.set_page_config(page_title="Unit 30: O Masamaamaanay", page_icon="🧩", layout="centered")
+st.set_page_config(page_title="Unit 30: O Maamaanan", page_icon="🌿", layout="centered")
 
-# --- CSS 美化 (多樣色彩) ---
+# --- CSS 美化 (大地綠色調) ---
 st.markdown("""
     <style>
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
@@ -37,22 +37,22 @@ st.markdown("""
     
     /* 單字卡 */
     .word-card {
-        background: linear-gradient(135deg, #F5F5F5 0%, #ffffff 100%);
+        background: linear-gradient(135deg, #DCEDC8 0%, #ffffff 100%);
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         text-align: center;
         margin-bottom: 15px;
-        border-bottom: 4px solid #9E9E9E;
+        border-bottom: 4px solid #689F38;
     }
     .emoji-icon { font-size: 48px; margin-bottom: 10px; }
-    .amis-text { font-size: 22px; font-weight: bold; color: #616161; }
+    .amis-text { font-size: 22px; font-weight: bold; color: #33691E; }
     .chinese-text { font-size: 16px; color: #7f8c8d; }
     
     /* 句子框 */
     .sentence-box {
-        background-color: #EEEEEE;
-        border-left: 5px solid #BDBDBD;
+        background-color: #F1F8E9;
+        border-left: 5px solid #AED581;
         padding: 15px;
         margin: 10px 0;
         border-radius: 0 10px 10px 0;
@@ -61,99 +61,99 @@ st.markdown("""
     /* 按鈕 */
     .stButton>button {
         width: 100%; border-radius: 12px; font-size: 20px; font-weight: 600;
-        background-color: #E0E0E0; color: #424242; border: 2px solid #9E9E9E; padding: 12px;
+        background-color: #DCEDC8; color: #33691E; border: 2px solid #689F38; padding: 12px;
     }
-    .stButton>button:hover { background-color: #BDBDBD; border-color: #757575; }
-    .stProgress > div > div > div > div { background-color: #9E9E9E; }
+    .stButton>button:hover { background-color: #C5E1A5; border-color: #558B2F; }
+    .stProgress > div > div > div > div { background-color: #689F38; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 2. 資料庫 (Unit 30: 14個單字 - 句子提取核心詞) ---
+# --- 2. 資料庫 (Unit 30: 14個單字 - 農牧自然篇) ---
 vocab_data = [
-    {"amis": "Singsi", "chi": "老師", "icon": "👩‍🏫", "source": "Row 9"},
-    {"amis": "Ising", "chi": "醫生 / 醫治", "icon": "👨‍⚕️", "source": "Row 272"},
-    {"amis": "Niyaro'", "chi": "部落", "icon": "🏡", "source": "Row 15"},
-    {"amis": "Safa", "chi": "弟妹 / 年幼者", "icon": "👶", "source": "Row 268"},
-    {"amis": "^Ekim", "chi": "黃金", "icon": "🪙", "source": "Row 564"},
-    {"amis": "Tomay", "chi": "熊", "icon": "🐻", "source": "Row 1290"},
-    {"amis": "Malicay", "chi": "被問 / 詢問", "icon": "❓", "source": "Row 209"},
-    {"amis": "Cima", "chi": "誰", "icon": "👤", "source": "Row 9"},
-    {"amis": "Maan", "chi": "什麼", "icon": "🤔", "source": "Row 13"},
-    {"amis": "Talacowa", "chi": "去哪裡", "icon": "🗺️", "source": "Row 7"},
-    {"amis": "Fali", "chi": "風", "icon": "💨", "source": "Row 555"},
-    {"amis": "Ngangan", "chi": "名字", "icon": "🏷️", "source": "Row 9"},
-    {"amis": "Posong", "chi": "台東", "icon": "📍", "source": "Row 19"},
-    {"amis": "Matoka", "chi": "懶惰", "icon": "😴", "source": "Row 404"},
+    {"amis": "Tefos", "chi": "甘蔗", "icon": "🎋", "source": "Row 1261"},
+    {"amis": "'Oway", "chi": "藤 / 黃藤", "icon": "🌿", "source": "Row 1175"},
+    {"amis": "Kolong", "chi": "牛", "icon": "🐂", "source": "Row 490"},
+    {"amis": "Ayam", "chi": "鳥", "icon": "🐦", "source": "Row 1029"},
+    {"amis": "Konga", "chi": "地瓜 / 蕃薯", "icon": "🍠", "source": "Row 1717"},
+    {"amis": "Dongec", "chi": "藤心", "icon": "🌱", "source": "Row 2181"},
+    {"amis": "Icep", "chi": "檳榔", "icon": "🌰", "source": "Row 273"},
+    {"amis": "Fonos", "chi": "刀 / 番刀", "icon": "🔪", "source": "Row 1146"},
+    {"amis": "Kangkang", "chi": "鋤頭 / 犁", "icon": "⛏️", "source": "Row 1157"},
+    {"amis": "Talod", "chi": "草 / 雜草", "icon": "🌾", "source": "Row 969"},
+    {"amis": "Militolak", "chi": "削皮", "icon": "🔪", "source": "Row 1261"},
+    {"amis": "Ma'engid", "chi": "被蛀 / 被咬", "icon": "🐛", "source": "Row 1028"},
+    {"amis": "Lomengaw", "chi": "生長 / 發芽", "icon": "🌱", "source": "Row 969"},
+    {"amis": "Pawli", "chi": "香蕉", "icon": "🍌", "source": "Row 4654"},
 ]
 
 # --- 句子庫 (7句: 嚴格源自 CSV 並移除連字號) ---
 sentences = [
-    {"amis": "O singsi kora a kaying.", "chi": "那位小姐是老師。", "icon": "👩‍🏫", "source": "Row 9"},
-    {"amis": "Cima ko ngangan ni ina?", "chi": "媽媽的名字是誰(什麼)？", "icon": "🏷️", "source": "Row 9"},
-    {"amis": "Talacowa ko widang no miso?", "chi": "你的朋友去哪裡？", "icon": "🗺️", "source": "Row 7"},
-    {"amis": "I cowa ko niyaro' no kapah?", "chi": "年輕人的部落在哪裡？", "icon": "🏡", "source": "Row 15"},
-    {"amis": "O tada^ekim ko micakayan no miso.", "chi": "你買的是純金。", "icon": "🪙", "source": "Row 564"},
-    {"amis": "Malicay ni ina no miso ko widang no mako.", "chi": "我的朋友被妳的媽媽詢問。", "icon": "❓", "source": "Row 209"},
-    {"amis": "Matoka ko safa no miso.", "chi": "你的弟弟(妹妹)很懶惰。", "icon": "😴", "source": "Row 404"},
+    {"amis": "Militolak to tefos.", "chi": "削甘蔗皮。", "icon": "🎋", "source": "Row 1261"},
+    {"amis": "O kalimelaan no maomahay ko kolong.", "chi": "牛是農民所珍惜的。", "icon": "🐂", "source": "Row 490"},
+    {"amis": "Wata! Tata'ang koni a konga!", "chi": "哇！這塊地瓜很大！", "icon": "🍠", "source": "Row 1717"},
+    {"amis": "Halo tapatapang no tefos a ma'engid.", "chi": "連甘蔗的根部都被蛀了。", "icon": "🐛", "source": "Row 1028"},
+    {"amis": "Midongec kako i lotok.", "chi": "我在山上採藤心。", "icon": "⛰️", "source": "Row 2181"},
+    {"amis": "Ci'orong ci wama to kangkang a minokay.", "chi": "父親扛著犁回家。", "icon": "⛏️", "source": "Row 1157"},
+    {"amis": "Lomengawto ko talod i papotal.", "chi": "在屋外雜草生長了。", "icon": "🌾", "source": "Row 969"},
 ]
 
 # --- 3. 隨機題庫 (Synced) ---
 raw_quiz_pool = [
     {
-        "q": "Talacowa ko widang no miso?",
-        "audio": "Talacowa ko widang no miso",
-        "options": ["你的朋友去哪裡？", "你的朋友在哪裡？", "你的朋友是誰？"],
-        "ans": "你的朋友去哪裡？",
-        "hint": "Talacowa (去哪裡) (Row 7)"
+        "q": "Militolak to tefos.",
+        "audio": "Militolak to tefos",
+        "options": ["削甘蔗皮", "吃甘蔗", "種甘蔗"],
+        "ans": "削甘蔗皮",
+        "hint": "Militolak (削皮), Tefos (甘蔗) (Row 1261)"
     },
     {
-        "q": "Matoka ko safa no miso.",
-        "audio": "Matoka ko safa no miso",
-        "options": ["你的弟妹很懶惰", "你的弟妹很勤勞", "你的弟妹很聰明"],
-        "ans": "你的弟妹很懶惰",
-        "hint": "Matoka (懶惰) (Row 404)"
+        "q": "Wata! Tata'ang koni a konga!",
+        "audio": "Wata! Tata'ang koni a konga",
+        "options": ["這塊地瓜很大", "這顆檳榔很大", "這把刀很大"],
+        "ans": "這塊地瓜很大",
+        "hint": "Konga (地瓜) (Row 1717)"
     },
     {
-        "q": "單字測驗：^Ekim",
-        "audio": "^Ekim",
-        "options": ["黃金", "錢", "鐵"],
-        "ans": "黃金",
-        "hint": "Row 564: O tada^ekim (純金)"
+        "q": "單字測驗：Kolong",
+        "audio": "Kolong",
+        "options": ["牛", "羊", "豬"],
+        "ans": "牛",
+        "hint": "農夫珍惜的動物 (Row 490)"
     },
     {
-        "q": "單字測驗：Cima",
-        "audio": "Cima",
-        "options": ["誰", "什麼", "哪裡"],
-        "ans": "誰",
-        "hint": "Cima ko ngangan? (名字是誰?) (Row 9)"
+        "q": "單字測驗：Dongec",
+        "audio": "Dongec",
+        "options": ["藤心", "竹筍", "地瓜"],
+        "ans": "藤心",
+        "hint": "山上採的 Dongec (Row 2181)"
     },
     {
-        "q": "I cowa ko niyaro' no kapah?",
-        "audio": "I cowa ko niyaro' no kapah",
-        "options": ["年輕人的部落在哪裡？", "年輕人的家在哪裡？", "年輕人的學校在哪裡？"],
-        "ans": "年輕人的部落在哪裡？",
-        "hint": "Niyaro' (部落) (Row 15)"
+        "q": "Lomengawto ko talod i papotal.",
+        "audio": "Lomengawto ko talod i papotal",
+        "options": ["雜草生長了", "花開了", "樹倒了"],
+        "ans": "雜草生長了",
+        "hint": "Talod (雜草), Lomengaw (生長) (Row 969)"
     },
     {
-        "q": "單字測驗：Ising",
-        "audio": "Ising",
-        "options": ["醫生/醫治", "老師", "警察"],
-        "ans": "醫生/醫治",
-        "hint": "生病要找 Ising (Row 272)"
+        "q": "單字測驗：Fonos",
+        "audio": "Fonos",
+        "options": ["刀/番刀", "槍", "弓箭"],
+        "ans": "刀/番刀",
+        "hint": "Row 1146: Cifonos... (帶刀)"
     },
     {
-        "q": "單字測驗：Tomay",
-        "audio": "Tomay",
-        "options": ["熊", "豬", "羊"],
-        "ans": "熊",
-        "hint": "山上的動物 (Row 1290)"
+        "q": "單字測驗：Icep",
+        "audio": "Icep",
+        "options": ["檳榔", "香菸", "酒"],
+        "ans": "檳榔",
+        "hint": "Row 273: Mi'icep (嚼檳榔)"
     },
     {
-        "q": "單字測驗：Singsi",
-        "audio": "Singsi",
-        "options": ["老師", "學生", "校長"],
-        "ans": "老師",
-        "hint": "在學校教書的人 (Row 9)"
+        "q": "單字測驗：Ma'engid",
+        "audio": "Ma'engid",
+        "options": ["被蛀/咬", "被打", "被吃"],
+        "ans": "被蛀/咬",
+        "hint": "Row 1028: 甘蔗被 Ma'engid"
     }
 ]
 
@@ -176,8 +176,8 @@ if 'init' not in st.session_state:
     st.session_state.init = True
 
 # --- 5. 主介面 ---
-st.markdown("<h1 style='text-align: center; color: #616161;'>Unit 30: O Masamaamaanay</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>各式各樣的事物 (Diverse Topics)</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #33691E;'>Unit 30: O Maamaanan</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>各式各樣的事物 (Plants, Animals & Tools)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
@@ -203,7 +203,7 @@ with tab1:
     for i, s in enumerate(sentences):
         st.markdown(f"""
         <div class="sentence-box">
-            <div style="font-size: 20px; font-weight: bold; color: #616161;">{s['icon']} {s['amis']}</div>
+            <div style="font-size: 20px; font-weight: bold; color: #33691E;">{s['icon']} {s['amis']}</div>
             <div style="font-size: 16px; color: #555; margin-top: 5px;">{s['chi']}</div>
             <div class="source-tag">src: {s['source']}</div>
         </div>
@@ -244,10 +244,10 @@ with tab2:
     else:
         st.progress(1.0)
         st.markdown(f"""
-        <div style='text-align: center; padding: 30px; background-color: #E0E0E0; border-radius: 20px; margin-top: 20px;'>
-            <h1 style='color: #616161;'>🏆 挑戰成功！</h1>
+        <div style='text-align: center; padding: 30px; background-color: #DCEDC8; border-radius: 20px; margin-top: 20px;'>
+            <h1 style='color: #33691E;'>🏆 挑戰成功！</h1>
             <h3 style='color: #333;'>本次得分：{st.session_state.score}</h3>
-            <p>你已經學會各式各樣的詞彙了！</p>
+            <p>你已經學會這些特殊的動植物詞彙了！</p>
         </div>
         """, unsafe_allow_html=True)
         
