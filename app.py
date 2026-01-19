@@ -27,7 +27,7 @@ def safe_play_audio(text):
         st.caption(f"🔇 (語音生成暫時無法使用)")
 
 # --- 0. 系統配置 ---
-st.set_page_config(page_title="Unit 30: O Tamera'", page_icon="🧩", layout="centered")
+st.set_page_config(page_title="Unit 30: O Masamaamaanay", page_icon="🧩", layout="centered")
 
 # --- CSS 美化 (多樣色彩) ---
 st.markdown("""
@@ -176,8 +176,8 @@ if 'init' not in st.session_state:
     st.session_state.init = True
 
 # --- 5. 主介面 ---
-st.markdown("<h1 style='text-align: center; color: #616161;'>Unit 30: O Tamera'</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>多樣主題 (Diverse Topics)</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #616161;'>Unit 30: O Masamaamaanay</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>各式各樣的事物 (Diverse Topics)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
@@ -247,7 +247,7 @@ with tab2:
         <div style='text-align: center; padding: 30px; background-color: #E0E0E0; border-radius: 20px; margin-top: 20px;'>
             <h1 style='color: #616161;'>🏆 挑戰成功！</h1>
             <h3 style='color: #333;'>本次得分：{st.session_state.score}</h3>
-            <p>你已經學會各種多樣詞彙了！</p>
+            <p>你已經學會各式各樣的詞彙了！</p>
         </div>
         """, unsafe_allow_html=True)
         
