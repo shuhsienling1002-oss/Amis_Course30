@@ -176,7 +176,7 @@ if 'init' not in st.session_state:
     st.session_state.init = True
 
 # --- 5. 主介面 ---
-st.markdown("<h1 style='text-align: center; color: #33691E;'>Unit 30: O Maamaanan</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #33691E;'>Unit 30: O Masamaamaanay</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #666;'>各式各樣的事物 (Plants, Animals & Tools)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
@@ -266,3 +266,4 @@ with tab2:
             
             st.session_state.quiz_questions = final_qs
             safe_rerun()
+
